@@ -16,8 +16,6 @@ struct Meme {
 }
 
 class CreateMeme: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
-    
-    let textFieldDel = TextFields()
 
     @IBOutlet weak var shareButton: UIBarButtonItem!
     @IBOutlet weak var cancelButton: UIBarButtonItem!
@@ -59,13 +57,6 @@ class CreateMeme: UIViewController, UIImagePickerControllerDelegate, UINavigatio
         toolbar1.hidden = false
     }
     
-    func changeTextColor(color: UIColor) {
-        textFieldDel.textAttributes = [NSStrokeColorAttributeName : UIColor.blackColor(), NSForegroundColorAttributeName : color, NSFontAttributeName : UIFont(name: "HelveticaNeue-CondensedBlack", size: 30)!, NSStrokeWidthAttributeName : -2.0]
-        colorButtonVisible(true)
-        textFieldDel.textFieldShouldBeginEditing(textField1)
-        textFieldDel.textFieldShouldBeginEditing(textField2)
-    }
-    
     @IBAction func fontColor(sender: AnyObject) {
         toolbar1.hidden = true
         
@@ -86,14 +77,6 @@ class CreateMeme: UIViewController, UIImagePickerControllerDelegate, UINavigatio
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
-    func picker(pickerVar: UIImagePickerControllerSourceType) {
-        let finalPicker = UIImagePickerController()
-        finalPicker.delegate = self
-        finalPicker.sourceType = pickerVar
-        
-        self.presentViewController(finalPicker, animated: true, completion: nil)
-    }
-    
     @IBAction func shareButton(sender: AnyObject) {
         let finalMeme = generatememedImage()
         
@@ -107,6 +90,56 @@ class CreateMeme: UIViewController, UIImagePickerControllerDelegate, UINavigatio
                 self.dismissViewControllerAnimated(true, completion: nil)
             }
         }
+    }
+    
+    let textFieldDel = TextFields()
+    
+    let delegate = UIApplication.sharedApplication().delegate as! AppDelegate
+    
+    override func prefersStatusBarHidden() -> Bool {
+        return true
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        shareButton.enabled = false
+        
+        self.textField1.delegate = textFieldDel
+        self.textField2.delegate = textFieldDel
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        subscribeToKeyboardNotifications()
+        
+        cameraButton.enabled = UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera)
+        
+        self.tabBarController?.tabBar.hidden = true
+        
+        colorButtonVisible(true)
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        unsubscribeFromKeyboardNotification()
+    }
+
+    
+    func changeTextColor(color: UIColor) {
+        textFieldDel.textAttributes = [NSStrokeColorAttributeName : UIColor.blackColor(), NSForegroundColorAttributeName : color, NSFontAttributeName : UIFont(name: "HelveticaNeue-CondensedBlack", size: 30)!, NSStrokeWidthAttributeName : -2.0]
+        colorButtonVisible(true)
+        textFieldDel.textFieldShouldBeginEditing(textField1)
+        textFieldDel.textFieldShouldBeginEditing(textField2)
+    }
+    
+    
+    func picker(pickerVar: UIImagePickerControllerSourceType) {
+        let finalPicker = UIImagePickerController()
+        finalPicker.delegate = self
+        finalPicker.sourceType = pickerVar
+        
+        self.presentViewController(finalPicker, animated: true, completion: nil)
     }
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
@@ -156,7 +189,7 @@ class CreateMeme: UIViewController, UIImagePickerControllerDelegate, UINavigatio
         
         UIGraphicsBeginImageContext(self.view.frame.size)
         
-        view.drawViewHierarchyInRect(self.view.frame,afterScreenUpdates: true)
+        view.drawViewHierarchyInRect(self.view.frame, afterScreenUpdates: true)
         
         let memedImage: UIImage = UIGraphicsGetImageFromCurrentImageContext()
         
@@ -169,12 +202,12 @@ class CreateMeme: UIViewController, UIImagePickerControllerDelegate, UINavigatio
     }
     
     func save() {
-        let meme = Meme(text1: self.textField1.text!, text2: textField2.text!, image1: finalImage.image!, finalImage: generatememedImage())
         
-        let object = UIApplication.sharedApplication().delegate
+        let imageData: NSData = UIImagePNGRepresentation(generatememedImage())!
         
-        let appDelegate = object as! AppDelegate
-        appDelegate.memes.append(meme)
+        let savedMeme = SavedMeme(image: imageData, topText: self.textField1.text!, bottomText: textField2.text!, context: (self.delegate.stack?.context)!)
+        
+        self.delegate.stack?.save()
     }
     
     func colorButtonVisible (answer:Bool) {
@@ -185,33 +218,5 @@ class CreateMeme: UIViewController, UIImagePickerControllerDelegate, UINavigatio
         whiteColorButton.hidden = answer
     }
     
-    override func prefersStatusBarHidden() -> Bool {
-        return true
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        shareButton.enabled = false
-        
-        self.textField1.delegate = textFieldDel
-        self.textField2.delegate = textFieldDel
-    }
-    
-    override func viewWillAppear(animated: Bool) {
-        subscribeToKeyboardNotifications()
-        
-        cameraButton.enabled = UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera)
- 
-        self.tabBarController?.tabBar.hidden = true
-        
-        colorButtonVisible(true)
-    }
-    
-    override func viewWillDisappear(animated: Bool) {
-        super.viewWillDisappear(animated)
-        
-        unsubscribeFromKeyboardNotification()
-    }
 }
 

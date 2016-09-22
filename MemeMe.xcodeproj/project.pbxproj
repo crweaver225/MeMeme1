@@ -19,6 +19,10 @@
 		2EBF3E141D35835100FC7DE5 /* MemeMeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBF3E131D35835100FC7DE5 /* MemeMeTests.swift */; };
 		2EBF3E1F1D35835100FC7DE5 /* MemeMeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBF3E1E1D35835100FC7DE5 /* MemeMeUITests.swift */; };
 		2EBF3E2D1D35876400FC7DE5 /* TextFields.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBF3E2C1D35876400FC7DE5 /* TextFields.swift */; };
+		2ED10FBC1D945DBC00D11E8A /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED10FBB1D945DBC00D11E8A /* CoreDataStack.swift */; };
+		2ED10FBF1D945F0800D11E8A /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2ED10FBD1D945F0800D11E8A /* Model.xcdatamodeld */; };
+		2ED10FC21D945FAF00D11E8A /* SavedMeme+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED10FC01D945FAF00D11E8A /* SavedMeme+CoreDataProperties.swift */; };
+		2ED10FC31D945FAF00D11E8A /* SavedMeme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED10FC11D945FAF00D11E8A /* SavedMeme.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +61,10 @@
 		2EBF3E1E1D35835100FC7DE5 /* MemeMeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemeMeUITests.swift; sourceTree = "<group>"; };
 		2EBF3E201D35835100FC7DE5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2EBF3E2C1D35876400FC7DE5 /* TextFields.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFields.swift; sourceTree = "<group>"; };
+		2ED10FBB1D945DBC00D11E8A /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		2ED10FBE1D945F0800D11E8A /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		2ED10FC01D945FAF00D11E8A /* SavedMeme+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "SavedMeme+CoreDataProperties.swift"; path = "../SavedMeme+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		2ED10FC11D945FAF00D11E8A /* SavedMeme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SavedMeme.swift; path = ../SavedMeme.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +95,10 @@
 		2EAA325D1D7DCEC70099710D /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				2ED10FBB1D945DBC00D11E8A /* CoreDataStack.swift */,
+				2ED10FBD1D945F0800D11E8A /* Model.xcdatamodeld */,
+				2ED10FC11D945FAF00D11E8A /* SavedMeme.swift */,
+				2ED10FC01D945FAF00D11E8A /* SavedMeme+CoreDataProperties.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -296,13 +308,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2ED10FC31D945FAF00D11E8A /* SavedMeme.swift in Sources */,
 				2EBF3E011D35835100FC7DE5 /* CreateMeme.swift in Sources */,
 				2EBF3E2D1D35876400FC7DE5 /* TextFields.swift in Sources */,
 				2E7B5ECD1D411A6E0006A5C0 /* CollectionViewCell.swift in Sources */,
 				2EBF3DFF1D35835100FC7DE5 /* AppDelegate.swift in Sources */,
 				2E7B5ECB1D4115AF0006A5C0 /* CollectionMemeCollector.swift in Sources */,
+				2ED10FBF1D945F0800D11E8A /* Model.xcdatamodeld in Sources */,
 				2E7B5ECF1D4167000006A5C0 /* MemeDetail.swift in Sources */,
+				2ED10FC21D945FAF00D11E8A /* SavedMeme+CoreDataProperties.swift in Sources */,
 				2E7B5EC91D3FD0B40006A5C0 /* TableMemeCollector.swift in Sources */,
+				2ED10FBC1D945DBC00D11E8A /* CoreDataStack.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -556,6 +572,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		2ED10FBD1D945F0800D11E8A /* Model.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				2ED10FBE1D945F0800D11E8A /* Model.xcdatamodel */,
+			);
+			currentVersion = 2ED10FBE1D945F0800D11E8A /* Model.xcdatamodel */;
+			path = Model.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 2EBF3DF31D35835000FC7DE5 /* Project object */;
 }

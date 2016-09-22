@@ -8,31 +8,60 @@
 
 import Foundation
 import UIKit
-
+import CoreData
 
 
 
 
 class TableMemeCollector: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
-    var memes: [Meme]!
-    
     @IBOutlet weak var memeTableView: UITableView!
+    
+    var memes = [SavedMeme]()
+    
+    let delegate = UIApplication.sharedApplication().delegate as! AppDelegate
+    
+    override func viewWillAppear(animated:Bool) {
+        super.viewWillAppear(animated)
+        
+        memes.removeAll()
+        
+        let fr = NSFetchRequest(entityName: "SavedMeme")
+        fr.sortDescriptors = [NSSortDescriptor(key: "image", ascending: true)]
+        
+        let fetchedResultsController = NSFetchedResultsController(fetchRequest: fr, managedObjectContext: (delegate.stack?.context)!, sectionNameKeyPath: nil, cacheName: nil)
+        
+        do {
+            try fetchedResultsController.performFetch()
+        } catch {
+            print("error fecthing records")
+        }
+        
+        for images in fetchedResultsController.fetchedObjects! {
+            
+            let imageMemes = images as! SavedMeme
+            
+            memes.append(imageMemes)
+        }
+        
+        self.navigationController?.navigationBarHidden = false
+        self.memeTableView?.reloadData()
+    }
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-       if let memes = memes {
-        return memes.count
-        }
-        return 0
+        
+       return memes.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
         let cell = tableView.dequeueReusableCellWithIdentifier("memeCell")!
         
         let row = memes[indexPath.row]
         
-        cell.textLabel?.text = "\(row.text1) , \(row.text2) "
-        cell.imageView?.image = row.finalImage
+        cell.textLabel?.text = "\(row.topText!) , \(row.bottomText!)"
+        cell.imageView?.image = UIImage(data: row.image!)
+        
         return cell
     }
     
@@ -44,17 +73,5 @@ class TableMemeCollector: UIViewController, UITableViewDataSource, UITableViewDe
         detailController.memes = row
         
         self.navigationController!.pushViewController(detailController, animated: true)
-    }
-    
-    override func viewWillAppear(animated:Bool) {
-        super.viewWillAppear(animated)
-        let applicationDelegate = (UIApplication.sharedApplication().delegate as! AppDelegate)
-        memes = applicationDelegate.memes
-        self.navigationController?.navigationBarHidden = false
-        self.memeTableView?.reloadData()
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
     }
 }
