@@ -84,7 +84,7 @@ class CreateMeme: UIViewController, UIImagePickerControllerDelegate, UINavigatio
         
         let AV = UIActivityViewController(activityItems: finalMemeFormat, applicationActivities: nil)
         self.presentViewController(AV, animated: true, completion: nil)
-        AV.completionWithItemsHandler = { activity, completed, items, error in
+        AV.completionWithItemsHandler = { (activity, completed, items, error) in
             if completed {
                 self.save()
                 self.dismissViewControllerAnimated(true, completion: nil)

@@ -364,7 +364,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="i3G-7X-WNn">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="i3G-7X-WNn">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -380,6 +380,15 @@
                             <constraint firstItem="i3G-7X-WNn" firstAttribute="top" secondItem="qFA-hm-5Xa" secondAttribute="bottom" constant="-20" id="qnu-t5-xhh"/>
                         </constraints>
                     </view>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="DcG-xR-5Cq">
+                        <barButtonItem key="rightBarButtonItem" systemItem="action" id="rxm-tS-urs">
+                            <connections>
+                                <action selector="shareMeme:" destination="YXh-Et-8vF" id="bVw-8M-4Qa"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="memeDetailimage" destination="i3G-7X-WNn" id="F7J-LB-T7q"/>
                     </connections>
