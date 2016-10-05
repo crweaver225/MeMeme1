@@ -9,7 +9,7 @@ MemeMe is an iOS app that allows users to create memes on their phone and both s
 
 ## Requirements to Use the App:
 
-- MemeMe is currently written in Swift 2.2 and compatible with iOS 7-9. 
+- MemeMe is now updated for Swift 3 and xCode 8.
 
 ## Other Things to Know:
 
