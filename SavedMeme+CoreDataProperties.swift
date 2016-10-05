@@ -14,7 +14,7 @@ import CoreData
 
 extension SavedMeme {
 
-    @NSManaged var image: NSData?
+    @NSManaged var image: Data?
     @NSManaged var topText: String?
     @NSManaged var bottomText: String?
 

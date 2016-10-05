@@ -13,20 +13,20 @@ class MemeDetail: UIViewController {
     
     @IBOutlet weak var memeDetailimage: UIImageView!
     
-    var memes: SavedMeme!
-    
-    @IBAction func shareMeme(sender: AnyObject) {
+    @IBAction func shareMeme(_ sender: AnyObject) {
         let av = UIActivityViewController(activityItems: [memes.image!], applicationActivities: nil)
-        self.presentViewController(av, animated: true, completion: nil)
+        self.present(av, animated: true, completion: nil)
         av.completionWithItemsHandler = { (activity, completed, items, error) in
             if completed {
-                self.dismissViewControllerAnimated(true, completion: nil)
+                self.dismiss(animated: true, completion: nil)
             }
         }
     }
     
-    override func viewWillAppear(animated: Bool) {
-        self.memeDetailimage?.image = UIImage(data: memes.image!)
+    var memes: SavedMeme!
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.memeDetailimage?.image = UIImage(data: memes.image! as Data)
     }
     
 }

@@ -19,14 +19,14 @@ class TableMemeCollector: UIViewController, UITableViewDataSource, UITableViewDe
     
     var memes = [SavedMeme]()
     
-    let delegate = UIApplication.sharedApplication().delegate as! AppDelegate
+    let delegate = UIApplication.shared.delegate as! AppDelegate
     
-    override func viewWillAppear(animated:Bool) {
+    override func viewWillAppear(_ animated:Bool) {
         super.viewWillAppear(animated)
         
         memes.removeAll()
         
-        let fr = NSFetchRequest(entityName: "SavedMeme")
+        let fr = NSFetchRequest<SavedMeme>(entityName: "SavedMeme")
         fr.sortDescriptors = [NSSortDescriptor(key: "image", ascending: true)]
         
         let fetchedResultsController = NSFetchedResultsController(fetchRequest: fr, managedObjectContext: (delegate.stack?.context)!, sectionNameKeyPath: nil, cacheName: nil)
@@ -44,31 +44,31 @@ class TableMemeCollector: UIViewController, UITableViewDataSource, UITableViewDe
             memes.append(imageMemes)
         }
         
-        self.navigationController?.navigationBarHidden = false
+        self.navigationController?.isNavigationBarHidden = false
         self.memeTableView?.reloadData()
     }
 
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
        return memes.count
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCellWithIdentifier("memeCell")!
+        let cell = tableView.dequeueReusableCell(withIdentifier: "memeCell")!
         
-        let row = memes[indexPath.row]
+        let row = memes[(indexPath as NSIndexPath).row]
         
         cell.textLabel?.text = "\(row.topText!) , \(row.bottomText!)"
-        cell.imageView?.image = UIImage(data: row.image!)
+        cell.imageView?.image = UIImage(data: row.image! as Data)
         
         return cell
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let detailController = self.storyboard!.instantiateViewControllerWithIdentifier("MemeDetail") as! MemeDetail
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let detailController = self.storyboard!.instantiateViewController(withIdentifier: "MemeDetail") as! MemeDetail
         
-        let row = memes[indexPath.row]
+        let row = memes[(indexPath as NSIndexPath).row]
         
         detailController.memes = row
         

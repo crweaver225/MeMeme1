@@ -12,9 +12,9 @@ import CoreData
 
 class SavedMeme: NSManagedObject {
 
-    convenience init(image: NSData, topText: String, bottomText: String, context: NSManagedObjectContext) {
-        if let ent = NSEntityDescription.entityForName("SavedMeme", inManagedObjectContext: context){
-            self.init(entity: ent, insertIntoManagedObjectContext: context)
+    convenience init(image: Data, topText: String, bottomText: String, context: NSManagedObjectContext) {
+        if let ent = NSEntityDescription.entity(forEntityName: "SavedMeme", in: context){
+            self.init(entity: ent, insertInto: context)
             self.image = image
             self.topText = topText
             self.bottomText = bottomText
