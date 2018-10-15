@@ -2,8 +2,8 @@
 iOS Application that allows users to create and share memes.
 
 
-![PinController. Location](https://github.com/crweaver225/Virtual-Race/blob/master/screenshots/CreateMeme.png)
-![PinController. Location](https://github.com/crweaver225/Virtual-Race/blob/master/screenshots/SharedMemes_CollectionView.png)
+![PinController. Location](https://github.com/crweaver225/MemeMe1/blob/master/screenshots/CreateMeme.png)
+![PinController. Location](https://github.com/crweaver225/MemeMe1/blob/master/screenshots/SharedMemes_CollectionView.png)
 
 ## About the App:
 
