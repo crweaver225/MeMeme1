@@ -1,6 +1,10 @@
 # MemeMe
 iOS Application that allows users to create and share memes.
 
+
+![PinController. Location](https://github.com/crweaver225/Virtual-Race/blob/master/screenshots/CreateMeme.png)
+![PinController. Location](https://github.com/crweaver225/Virtual-Race/blob/master/screenshots/SharedMemes_CollectionView.png)
+
 ## About the App:
 
 MemeMe is an iOS app that allows users to create memes on their phone and both save them to the phone or share them with their friends. MemeMe gives users the opportunity to take a new photo with their camera or use one of the existing photos in their photo library to make a meme. Text can be added to both the top and bottom of the photo to create the meme. 
